@@ -13,14 +13,15 @@ from stactools.aster.constants import (HDF_ASSET_KEY, QA_BROWSE_ASSET_KEY,
                                        VNIR_BROWSE_ASSET_KEY, VNIR_SENSOR,
                                        XML_ASSET_KEY)
 from stactools.aster.commands import create_aster_command
-from tests.utils import (TestData, CliTestCase)
+from stactools.testing import CliTestCase
+from tests import test_data
 
-HDF_PATH_EXTERNAL = 'aster/AST_L1T_00305032000040446_20150409135350_78838.hdf'
-XML_PATH = "data-files/aster/AST_L1T_00305032000040446_20150409135350_78838.hdf.xml"
-VNIR_BROWSE_PATH = "data-files/aster/AST_L1T_00305032000040446_20150409135350_78838_BR.2.VNIR.jpg"
-TIR_BROWSE_PATH = "data-files/aster/AST_L1T_00305032000040446_20150409135350_78838_BR.2.TIR.jpg"
-QA_BROWSE_PATH = "data-files/aster/AST_L1T_00305032000040446_20150409135350_78838_BR.2.QA.jpg"
-QA_TXT_PATH = "data-files/aster/AST_L1T_00305032000040446_20150409135350_78838_QA.txt"
+HDF_PATH_EXTERNAL = 'AST_L1T_00305032000040446_20150409135350_78838.hdf'
+XML_PATH = "data-files/AST_L1T_00305032000040446_20150409135350_78838.hdf.xml"
+VNIR_BROWSE_PATH = "data-files/AST_L1T_00305032000040446_20150409135350_78838_BR.2.VNIR.jpg"
+TIR_BROWSE_PATH = "data-files/AST_L1T_00305032000040446_20150409135350_78838_BR.2.TIR.jpg"
+QA_BROWSE_PATH = "data-files/AST_L1T_00305032000040446_20150409135350_78838_BR.2.QA.jpg"
+QA_TXT_PATH = "data-files/AST_L1T_00305032000040446_20150409135350_78838_QA.txt"
 
 
 class CreateItemTest(CliTestCase):
@@ -29,11 +30,11 @@ class CreateItemTest(CliTestCase):
 
     def test_create_item_from_xml(self):
         xml_paths = [
-            TestData.get_path(
-                'data-files/aster/AST_L1T_00303042000203404_20150409092553_2788.hdf.xml'
+            test_data.get_path(
+                'data-files/AST_L1T_00303042000203404_20150409092553_2788.hdf.xml'
             ),
-            TestData.get_path(
-                'data-files/aster/AST_L1T_00309032000003144_20150411122552_103734.hdf.xml'
+            test_data.get_path(
+                'data-files/AST_L1T_00309032000003144_20150411122552_103734.hdf.xml'
             )
         ]
 
@@ -42,11 +43,9 @@ class CreateItemTest(CliTestCase):
                 with TemporaryDirectory() as tmp_dir:
                     stac_cmd = [
                         'aster', 'create-item', '--xml', xml_path, '--vnir',
-                        TestData.get_path('data-files/aster/dummy.tif'),
-                        '--swir',
-                        TestData.get_path('data-files/aster/dummy.tif'),
-                        '--tir',
-                        TestData.get_path('data-files/aster/dummy.tif'),
+                        test_data.get_path('data-files/dummy.tif'), '--swir',
+                        test_data.get_path('data-files/dummy.tif'), '--tir',
+                        test_data.get_path('data-files/dummy.tif'),
                         '--vnir-browse', VNIR_BROWSE_PATH, '--tir-browse',
                         TIR_BROWSE_PATH, '--qa-browse', QA_BROWSE_PATH,
                         '--qa-txt', QA_TXT_PATH, '--output', tmp_dir
@@ -68,8 +67,8 @@ class CreateItemTest(CliTestCase):
     def test_create_cogs_then_items(self):
         """Test cogs and items so we don't have to save additional
         test data"""
-        hdf_path = TestData.get_external_data(HDF_PATH_EXTERNAL)
-        xml_path = TestData.get_path(XML_PATH)
+        hdf_path = test_data.get_external_data(HDF_PATH_EXTERNAL)
+        xml_path = test_data.get_path(XML_PATH)
 
         with TemporaryDirectory() as tmp_dir:
             cog_cmd = [

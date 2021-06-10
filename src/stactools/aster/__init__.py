@@ -11,3 +11,7 @@ def register_plugin(registry):
     from stactools.aster import commands
 
     registry.register_subcommand(commands.create_aster_command)
+
+
+__version__ = '0.2.0-alpha1'
+"""Library version"""

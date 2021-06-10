@@ -1,0 +1,6 @@
+name: stactools-aster
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - gdal

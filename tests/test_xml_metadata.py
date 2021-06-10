@@ -9,13 +9,13 @@ from stactools.aster.constants import (SWIR_SENSOR, TIR_SENSOR,
                                        LOWER_LEFT_QUAD_CLOUD_COVER,
                                        LOWER_RIGHT_QUAD_CLOUD_COVER,
                                        VNIR_SENSOR)
-from tests.utils import TestData
+from tests import test_data
 
 
 class XmlMetadataTest(unittest.TestCase):
     def test_parses_xml(self):
-        xml_path = TestData.get_path(
-            'data-files/aster/AST_L1T_00305032000040446_20150409135350_78838.hdf.xml'
+        xml_path = test_data.get_path(
+            'data-files/AST_L1T_00305032000040446_20150409135350_78838.hdf.xml'
         )
         xml_metadata = XmlMetadata.from_file(xml_path)
 
