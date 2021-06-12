@@ -17,5 +17,5 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
     ./docker/build
     docker run --rm \
         --entrypoint /src/stactools-aster/scripts/cibuild \
-        stactools-aster-dev:latest
+        stacutils/stactools-aster:latest-dev
 fi

@@ -1,7 +1,5 @@
-FROM stactools-aster:latest
+FROM stacutils/stactools:0.2.1a0-dev
 
-RUN conda install -c conda-forge pandoc
-
-COPY . /src/stactools-aster
-RUN pip install -r /src/stactools-aster/requirements-dev.txt
-WORKDIR /src/stactools-aster
+WORKDIR /opt/aster
+COPY . ./
+RUN pip install --no-deps -e .
