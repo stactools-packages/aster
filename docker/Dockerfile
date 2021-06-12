@@ -1,4 +1,4 @@
-FROM stacutils/stactools:0.2.1a0
+FROM stacutils/stactools:0.2.1a1
 
 WORKDIR /opt/aster
 COPY src ./src
