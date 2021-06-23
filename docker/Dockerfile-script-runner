@@ -1,0 +1,5 @@
+FROM python:3-buster
+
+WORKDIR /opt/aster
+COPY . ./
+RUN pip install -r requirements-dev.txt

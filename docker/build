@@ -38,6 +38,7 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
     if [ "${1:-}" = "--help" ]; then
         usage
     else
+        docker build $PULL -t stactools-aster-script-runner -f docker/Dockerfile-script-runner .
         STACTOOLS_VERSION=$(docker/run-script python scripts/stactools-version.py)
         echo "Building with stactools version $STACTOOLS_VERSION"
         docker build $PULL --build-arg STACTOOLS_VERSION=$STACTOOLS_VERSION -t stacutils/stactools-aster:latest -f docker/Dockerfile .
