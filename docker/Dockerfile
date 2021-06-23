@@ -1,4 +1,5 @@
-FROM stacutils/stactools:0.2.1a1
+ARG STACTOOLS_VERSION=latest
+FROM stacutils/stactools:$STACTOOLS_VERSION
 
 WORKDIR /opt/aster
 COPY src ./src
