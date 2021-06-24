@@ -1,5 +1,10 @@
 FROM continuumio/miniconda3
 
+ENV PIP_NO_BINARY rasterio
+RUN apt-get update \
+    && apt-get install -y build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN conda update conda && conda install pip
 
 COPY environment.yml /tmp/environment.yml
