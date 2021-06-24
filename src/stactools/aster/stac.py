@@ -138,8 +138,7 @@ def create_item(xml_href: str,
     # view
     view_ext = ViewExtension.ext(item, add_if_missing=True)
     view_ext.sun_azimuth = xml_metadata.sun_azimuth
-    sun_elevation = xml_metadata.sun_elevation
-    view_ext.sun_elevation = sun_elevation
+    view_ext.sun_elevation = xml_metadata.sun_elevation
 
     # proj
     projection_ext = ProjectionExtension.ext(item, add_if_missing=True)
