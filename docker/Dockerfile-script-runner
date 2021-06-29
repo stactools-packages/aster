@@ -1,6 +1,6 @@
 FROM python:3-buster
 
-WORKDIR /opt/aster
+WORKDIR /opt/stactools-aster
 COPY requirements-dev.txt ./
 RUN pip install -r requirements-dev.txt
 

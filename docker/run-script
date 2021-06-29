@@ -18,7 +18,7 @@ if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
     if [ "${1:-}" = "--help" ]; then
         usage
     else
-        docker run --rm --workdir=/opt/aster -v $(pwd):/opt/aster stactools-aster-script-runner "$@"
+        docker run --rm -v $(pwd):/opt/stactools-aster stactools-aster-script-runner "$@"
     fi
     exit
 fi
