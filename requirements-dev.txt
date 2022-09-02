@@ -1,10 +1,8 @@
+black
 codespell
-coverage
 flake8
-pylint
-sphinx
-sphinx-autobuild
-sphinx-click
-sphinxcontrib-fulltoc
-sphinxcontrib-napoleon
-yapf
+isort
+mypy
+pre-commit
+pytest
+pytest-cov
