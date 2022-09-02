@@ -1,21 +1,24 @@
 import unittest
 
-from shapely.geometry import shape, box
+from shapely.geometry import box, shape
 
+from stactools.aster.constants import (
+    LOWER_LEFT_QUAD_CLOUD_COVER,
+    LOWER_RIGHT_QUAD_CLOUD_COVER,
+    SWIR_SENSOR,
+    TIR_SENSOR,
+    UPPER_LEFT_QUAD_CLOUD_COVER,
+    UPPER_RIGHT_QUAD_CLOUD_COVER,
+    VNIR_SENSOR,
+)
 from stactools.aster.xml_metadata import XmlMetadata
-from stactools.aster.constants import (SWIR_SENSOR, TIR_SENSOR,
-                                       UPPER_LEFT_QUAD_CLOUD_COVER,
-                                       UPPER_RIGHT_QUAD_CLOUD_COVER,
-                                       LOWER_LEFT_QUAD_CLOUD_COVER,
-                                       LOWER_RIGHT_QUAD_CLOUD_COVER,
-                                       VNIR_SENSOR)
 from tests import test_data
 
 
 class XmlMetadataTest(unittest.TestCase):
     def test_parses_xml(self):
         xml_path = test_data.get_path(
-            'data-files/AST_L1T_00305032000040446_20150409135350_78838.hdf.xml'
+            "data-files/AST_L1T_00305032000040446_20150409135350_78838.hdf.xml"
         )
         xml_metadata = XmlMetadata.from_file(xml_path)
 
