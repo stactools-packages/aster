@@ -101,7 +101,7 @@ def create_cogs(
                 "non-standard ASTER L1T 003 HDF-EOS file?"
             )
         sensor = m.group(1)
-        band_order = m.group(2)
+        band_order = int(m.group(2))
         sensor_to_subdatasets[sensor].append((subdataset, band_order))
 
     # Sort by band_order
