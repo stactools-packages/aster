@@ -2,11 +2,10 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 
 from pystac.extensions.sat import OrbitState
-from pystac.utils import str_to_datetime
+from pystac.utils import map_opt, str_to_datetime
 from shapely.geometry import Point, Polygon, mapping
 from stactools.core.io import ReadHrefModifier
 from stactools.core.io.xml import XmlElement
-from stactools.core.utils import map_opt
 
 from stactools.aster.constants import (
     LOWER_LEFT_QUAD_CLOUD_COVER,
