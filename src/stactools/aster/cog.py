@@ -8,6 +8,7 @@ from typing import Any, Dict, List, Tuple
 import rasterio as rio
 from shapely.geometry import shape
 from stactools.core.projection import reproject_geom
+from stactools.core.utils import ignore_not_georeferenced
 from stactools.core.utils.convert import cogify
 from stactools.core.utils.subprocess import call
 
@@ -88,8 +89,9 @@ def create_cogs(
     file_name = os.path.basename(hdf_path)
     aster_id = AsterSceneId.from_path(file_name)
 
-    with rio.open(hdf_path) as ds:
-        subdatasets = ds.subdatasets
+    with ignore_not_georeferenced():
+        with rio.open(hdf_path) as ds:
+            subdatasets = ds.subdatasets
 
     # Gather the subdatasets by sensor, sorted by band number
     sensor_to_subdatasets = defaultdict(list)
