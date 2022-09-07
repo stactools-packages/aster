@@ -70,6 +70,7 @@ def _create_cog_for_sensor(
 
     set_band_names(merged_path, band_names)
 
+    os.makedirs(output_dir, exist_ok=True)
     cogify(merged_path, sensor_cog_href, profile={"predictor": 2})
 
     return sensor_cog_href
