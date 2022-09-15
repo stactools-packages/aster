@@ -1,11 +1,15 @@
 import json
 import logging
 import os
+import sys
 from typing import Optional
 
 import click
 import pystac
+from pystac import Item
+from stactools.core.utils.raster_footprint import DEFAULT_PRECISION
 
+import stactools.aster.utils
 from stactools.aster.cog import create_cogs
 from stactools.aster.stac import create_item
 from stactools.aster.xml_metadata import XmlMetadata
@@ -98,5 +102,64 @@ def create_aster_command(cli):
         item.set_self_href(item_path)
 
         item.save_object()
+
+    @aster.command(
+        "update-geometry", short_help="Update an ASTER item's geometry using its assets"
+    )
+    @click.argument("HREF")
+    @click.option(
+        "-p",
+        "--precision",
+        type=int,
+        help="The number of decimal places to include in the coordinates for the "
+        "reprojected geometry.",
+        default=DEFAULT_PRECISION,
+    )
+    @click.option(
+        "-d",
+        "--densification-factor",
+        type=int,
+        help="The factor by which to increase point density within the polygon.",
+    )
+    @click.option(
+        "-s",
+        "--simplify-tolerance",
+        type=float,
+        help="All points in the simplified object will be within "
+        "the tolerance distance of the original geometry, in degrees.",
+    )
+    def update_geometry(
+        href: str,
+        precision: int,
+        densification_factor: Optional[int],
+        simplify_tolerance: Optional[float],
+    ):
+        """Update an item's geometry using its assets.
+
+        Prints the updated item to stdout.
+
+        Args:
+            href (str): The HREF of the item
+            sign_with_planetary_computer (bool): Whether to sign the item's
+                assets using the Planetary Computer API.
+            precision (int): The number of decimal places to include in the
+                coordinates for the reprojected geometry.
+            densification_factor (Optional[int]): The factor by which to
+                increase point density within the polygon.  A factor of 2 would
+                double the density of points (placing one new point between each
+                existing pair of points), a factor of 3 would place two points
+                between each point, etc.
+            simplify_tolerance (Optional[float]): All points in the simplified
+                object will be within the tolerance distance of the original
+                geometry, in degrees.
+        """
+        item = Item.from_file(href)
+        item = stactools.aster.utils.update_geometry(
+            item,
+            precision=precision,
+            densification_factor=densification_factor,
+            simplify_tolerance=simplify_tolerance,
+        )
+        json.dump(item.to_dict(), sys.stdout)
 
     return aster

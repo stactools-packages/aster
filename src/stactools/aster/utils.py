@@ -1,11 +1,22 @@
 import re
 from collections import defaultdict
-from typing import Dict
+from typing import Dict, Optional
 
+import shapely.geometry
+import stactools.core.utils.raster_footprint
+from pystac import Item
 from pystac.extensions.eo import Band
 from stactools.core.projection import epsg_from_utm_zone_number
+from stactools.core.utils.raster_footprint import DEFAULT_PRECISION
 
-from stactools.aster.constants import ASTER_BANDS, ASTER_FILE_NAME_REGEX
+from stactools.aster.constants import (
+    ASTER_BANDS,
+    ASTER_FILE_NAME_REGEX,
+    NO_DATA,
+    SWIR_SENSOR,
+    TIR_SENSOR,
+    VNIR_SENSOR,
+)
 
 
 class AsterSceneId:
@@ -71,3 +82,40 @@ def get_sensors_to_bands() -> Dict[str, Band]:
         sensor_to_bands[sensor] = sorted(sensor_to_bands[sensor], key=key)
 
     return dict(sensor_to_bands)
+
+
+def update_geometry(
+    item: Item,
+    *,
+    precision: int = DEFAULT_PRECISION,
+    densification_factor: Optional[int] = None,
+    simplify_tolerance: Optional[float] = None,
+) -> Item:
+    """Updates an ASTER item geometry to enclose all bands of all three main assets.
+
+    The Item's geometry is modified in the operation, and the modified item is
+    returned from the function.
+
+    Args:
+        item (pystac.Item): The ASTER item.
+
+    Returns:
+        pystac.Item: The updated item.
+
+    """
+    footprints = list()
+    for key in (VNIR_SENSOR, SWIR_SENSOR, TIR_SENSOR):
+        asset = item.assets[key]
+        footprint = stactools.core.utils.raster_footprint.data_footprint(
+            asset.href,
+            precision=precision,
+            densification_factor=densification_factor,
+            simplify_tolerance=simplify_tolerance,
+            no_data=NO_DATA,
+            bands=[],
+        )
+        footprints.append(shapely.geometry.shape(footprint))
+    merged_footprint = footprints[0].union(footprints[1])
+    merged_footprint = merged_footprint.union(footprints[2])
+    item.geometry = shapely.geometry.mapping(merged_footprint)
+    return item

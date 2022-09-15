@@ -126,3 +126,5 @@ UPPER_LEFT_QUAD_CLOUD_COVER = "aster:upper_left_quad_cloud_cover"
 UPPER_RIGHT_QUAD_CLOUD_COVER = "aster:upper_right_quad_cloud_cover"
 LOWER_LEFT_QUAD_CLOUD_COVER = "aster:lower_left_quad_cloud_cover"
 LOWER_RIGHT_QUAD_CLOUD_COVER = "aster:lower_right_quad_cloud_cover"
+
+NO_DATA = 0
