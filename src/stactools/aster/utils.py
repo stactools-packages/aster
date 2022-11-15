@@ -105,16 +105,19 @@ def update_geometry(
     """
     footprints = list()
     for key in (VNIR_SENSOR, SWIR_SENSOR, TIR_SENSOR):
-        asset = item.assets[key]
-        footprint = stactools.core.utils.raster_footprint.data_footprint(
-            asset.href,
-            precision=precision,
-            densification_factor=densification_factor,
-            simplify_tolerance=simplify_tolerance,
-            no_data=NO_DATA,
-            bands=[],
-        )
-        footprints.append(shapely.geometry.shape(footprint))
+        asset = item.assets.get(key)
+        if asset:
+            href = asset.get_absolute_href()
+            if href:
+                footprint = stactools.core.utils.raster_footprint.data_footprint(
+                    href=href,
+                    precision=precision,
+                    densification_factor=densification_factor,
+                    simplify_tolerance=simplify_tolerance,
+                    no_data=NO_DATA,
+                    bands=[],
+                )
+                footprints.append(shapely.geometry.shape(footprint))
     merged_footprint = footprints[0].union(footprints[1])
     merged_footprint = merged_footprint.union(footprints[2])
     item.geometry = shapely.geometry.mapping(merged_footprint)
