@@ -118,7 +118,10 @@ def update_geometry(
                     bands=[],
                 )
                 footprints.append(shapely.geometry.shape(footprint))
-    merged_footprint = footprints[0].union(footprints[1])
-    merged_footprint = merged_footprint.union(footprints[2])
+    if not footprints:
+        return item
+    merged_footprint = footprints[0]
+    for footprint in footprints[1:]:
+        merged_footprint = merged_footprint.union(footprint)
     item.geometry = shapely.geometry.mapping(merged_footprint)
     return item
