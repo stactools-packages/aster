@@ -7,6 +7,7 @@ import rasterio as rio
 from pystac import ProviderRole
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.projection import ProjectionExtension
+from pystac.extensions.raster import RasterBand, RasterExtension
 from pystac.extensions.sat import SatExtension
 from pystac.extensions.view import ViewExtension
 from stactools.core.io import ReadHrefModifier
@@ -17,6 +18,7 @@ from stactools.aster.constants import (
     ASTER_PLATFORM,
     ASTER_SENSORS,
     HDF_ASSET_KEY,
+    NO_DATA,
     QA_BROWSE_ASSET_KEY,
     QA_TXT_ASSET_KEY,
     SWIR_SENSOR,
@@ -97,6 +99,20 @@ def _add_cog_assets(
             asset_projection.shape = image_shape
             asset_projection.bbox = proj_bbox
             asset_projection.transform = transform
+
+            bands = []
+            assert asset_eo.bands
+            for eo_band, dtype in zip(asset_eo.bands, ds.dtypes):
+                spatial_resolution = round(asset_projection.transform[0])
+                band = RasterBand.create(
+                    nodata=NO_DATA,
+                    data_type=dtype,
+                    spatial_resolution=spatial_resolution,
+                )
+                band.properties["name"] = eo_band.name
+                bands.append(band)
+            raster = RasterExtension.ext(sensor_asset)
+            raster.bands = bands
 
         item.add_asset(sensor, sensor_asset)
 
