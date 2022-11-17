@@ -117,6 +117,26 @@
         0.0,
         1.0
       ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 15,
+          "name": "VNIR_Band1"
+        },
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 15,
+          "name": "VNIR_Band2"
+        },
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 15,
+          "name": "VNIR_Band3N"
+        }
+      ],
       "roles": [
         "data"
       ]
@@ -188,6 +208,44 @@
         0.0,
         1.0
       ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 30,
+          "name": "SWIR_Band4"
+        },
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 30,
+          "name": "SWIR_Band5"
+        },
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 30,
+          "name": "SWIR_Band6"
+        },
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 30,
+          "name": "SWIR_Band7"
+        },
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 30,
+          "name": "SWIR_Band8"
+        },
+        {
+          "nodata": 0,
+          "data_type": "uint8",
+          "spatial_resolution": 30,
+          "name": "SWIR_Band9"
+        }
+      ],
       "roles": [
         "data"
       ]
@@ -252,6 +310,38 @@
         0.0,
         0.0,
         1.0
+      ],
+      "raster:bands": [
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 90,
+          "name": "TIR_Band10"
+        },
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 90,
+          "name": "TIR_Band11"
+        },
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 90,
+          "name": "TIR_Band12"
+        },
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 90,
+          "name": "TIR_Band13"
+        },
+        {
+          "nodata": 0,
+          "data_type": "uint16",
+          "spatial_resolution": 90,
+          "name": "TIR_Band14"
+        }
       ],
       "roles": [
         "data"
