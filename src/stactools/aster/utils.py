@@ -1,6 +1,6 @@
 import re
 from collections import defaultdict
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 
 import shapely.geometry
 import stactools.core.utils.raster_footprint
@@ -65,7 +65,7 @@ def epsg_from_aster_utm_zone_number(utm_zone_number):
     return epsg_from_utm_zone_number(utm_zone_number, south)
 
 
-def get_sensors_to_bands() -> Dict[str, Band]:
+def get_sensors_to_bands() -> Dict[str, List[Band]]:
     sensor_to_bands = defaultdict(list)
 
     def key(band: Band) -> str:
