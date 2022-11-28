@@ -13,5 +13,5 @@ def register_plugin(registry):
     registry.register_subcommand(commands.create_aster_command)
 
 
-__version__ = "0.2.1a1"
+__version__ = "0.2.0"
 """Library version"""
