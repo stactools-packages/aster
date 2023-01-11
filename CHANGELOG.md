@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2022-01-11
+
 ### Fixed
 
 - `bbox` is updated when using `update_geometry` ([#18](https://github.com/stactools-packages/aster/pull/18))
@@ -15,5 +17,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This is the first tagged version.
 
-[Unreleased]: https://github.com/stactools-packages/aster/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/stactools-packages/aster/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/stactools-packages/aster/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/stactools-packages/aster/tag/v0.2.0
