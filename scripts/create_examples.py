@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from stactools.aster import cog, stac
+from stactools.aster import cog, stac, utils
 from stactools.aster.xml_metadata import XmlMetadata
 
 root = Path(__file__).parents[1]
@@ -21,6 +21,7 @@ item = stac.create_item(
     tir_cog_href=paths["TIR"],
     hdf_href=str(hdf_path),
 )
+item = utils.update_geometry(item)
 item.set_self_href(str(item_path))
 item.make_asset_hrefs_relative()
 item.save_object(include_self_link=False)
