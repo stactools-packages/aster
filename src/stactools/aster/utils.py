@@ -12,6 +12,7 @@ from stactools.core.utils.raster_footprint import DEFAULT_PRECISION
 from stactools.aster.constants import (
     ASTER_BANDS,
     ASTER_FILE_NAME_REGEX,
+    DEFAULT_SIMPLIFY_TOLERANCE,
     NO_DATA,
     SWIR_SENSOR,
     TIR_SENSOR,
@@ -89,7 +90,7 @@ def update_geometry(
     *,
     precision: int = DEFAULT_PRECISION,
     densification_factor: Optional[int] = None,
-    simplify_tolerance: Optional[float] = None,
+    simplify_tolerance: Optional[float] = DEFAULT_SIMPLIFY_TOLERANCE,
 ) -> Item:
     """Updates an ASTER item geometry to enclose all bands of all three main assets.
 
