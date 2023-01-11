@@ -124,4 +124,5 @@ def update_geometry(
     for footprint in footprints[1:]:
         merged_footprint = merged_footprint.union(footprint)
     item.geometry = shapely.geometry.mapping(merged_footprint)
+    item.bbox = merged_footprint.bounds
     return item
