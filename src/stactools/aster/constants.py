@@ -128,3 +128,4 @@ LOWER_LEFT_QUAD_CLOUD_COVER = "aster:lower_left_quad_cloud_cover"
 LOWER_RIGHT_QUAD_CLOUD_COVER = "aster:lower_right_quad_cloud_cover"
 
 NO_DATA = 0
+DEFAULT_SIMPLIFY_TOLERANCE = 0.001
